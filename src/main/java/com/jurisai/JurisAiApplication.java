@@ -1,12 +1,7 @@
 package com.jurisai;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.jurisai.entity.Question;
-import com.jurisai.repository.QuestionRepository;
 
 @SpringBootApplication
 public class JurisAiApplication {
@@ -15,7 +10,7 @@ public class JurisAiApplication {
         SpringApplication.run(JurisAiApplication.class, args);
     }
 
-    // Este Bean executa um teste automático ao iniciar a aplicação
+    /* Este Bean executa um teste automático ao iniciar a aplicação
     @Bean
     public CommandLineRunner testDatabaseConnection(QuestionRepository questionRepository) {
         return args -> {
@@ -40,5 +35,5 @@ public class JurisAiApplication {
 
             System.out.println("--- TESTE FINALIZADO COM SUCESSO ---");
         };
-    }
+    }*/
 }

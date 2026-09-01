@@ -1,8 +1,11 @@
 spring:
+  main:
+    web-application-type: none 
+
   datasource:
-    url: jdbc:postgresql://db.qtzcfingeeegjyfojzik.supabase.co:5432/postgres
-    username: postgres 
-    password: portaVermelha13 
+    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres
+    username: postgres.qtzcfingeeegjyfojzik 
+    password: portaVermelha13
     driver-class-name: org.postgresql.Driver
   
   jpa:
