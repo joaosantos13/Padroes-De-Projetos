@@ -6,12 +6,15 @@ import com.jurisai.Visual.CommandExecutor;
 import com.jurisai.Visual.HistoryPanel;
 import com.jurisai.Visual.QuestionPanel;
 import com.jurisai.Visual.SourcePanel;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+@SpringBootApplication
 public class JurisAiApplication extends Application {
 
     @Override
@@ -70,7 +73,40 @@ public class JurisAiApplication extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    @Override
+    public void init() {
+        SpringApplication.run(JurisAiApplication.class);
     }
+
+   public static void main(String[] args) {
+        Application.launch(JurisAiApplication.class, args);
+    }
+
+    /* Este Bean executa um teste automático ao iniciar a aplicação
+    @Bean
+    public CommandLineRunner testDatabaseConnection(QuestionRepository questionRepository) {
+        return args -> {
+            System.out.println("--- INICIANDO TESTE DE BANCO DE DADOS ---");
+
+            // 1. Criando uma pergunta de teste
+            Question testQuestion = new Question();
+            testQuestion.setText("Como funciona a devolução de produtos por arrependimento?");
+            testQuestion.setCategory("Direito do Consumidor");
+
+            // 2. Salvando no banco
+            questionRepository.save(testQuestion);
+            System.out.println("✅ Pergunta salva com sucesso! ID gerado: " + testQuestion.getId());
+
+            // 3. Buscando a pergunta no banco pela categoria
+            var recoveredQuestions = questionRepository.findByCategory("Direito do Consumidor");
+            System.out.println("✅ Perguntas encontradas na categoria: " + recoveredQuestions.size());
+            
+            if (!recoveredQuestions.isEmpty()) {
+                System.out.println("Texto da pergunta recuperada: " + recoveredQuestions.get(0).getText());
+            }
+
+            System.out.println("--- TESTE FINALIZADO COM SUCESSO ---");
+        };
+    }*/
+ 
 }
