@@ -1,9 +1,16 @@
 spring:
+
   application:
     name: juris-ai
 
   main:
     web-application-type: none
+
+  datasource:
+    url: jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:6543/postgres
+    username: postgres.qtzcfingeeegjyfojzik 
+    password: portaVermelha13
+    driver-class-name: org.postgresql.Driver
 
   ai:
     ollama:
@@ -11,3 +18,12 @@ spring:
       chat:
         options:
           model: llama3:latest
+
+  jpa:
+    hibernate:
+      ddl-auto: update 
+    show-sql: true 
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
