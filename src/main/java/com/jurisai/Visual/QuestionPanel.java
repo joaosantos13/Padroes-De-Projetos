@@ -53,12 +53,36 @@ public class QuestionPanel implements ComponenteGUI {
         btnEnviar.setOnAction(e -> {
             String pergunta = txtPergunta.getText();
             if (!pergunta.isEmpty()) {
-                executor.runCommand(new SearchLawCommand(pergunta)); // Manda procurar as leis relacionadas à pergunta
-                executor.runCommand(new SearchJurisprudenceCommand(pergunta)); // Manda procurar decisões judiciais anteriores sobre a dúvida
-                executor.runCommand(new GenerateAnswerCommand(pergunta)); // Manda a ia gerar uma resposta
-                executor.runCommand(new ShowSourcesCommand("Art. 5º da CF / Art. 335 do CPC")); // Manda exibir os artigos da lei usados como referência
-                executor.runCommand(new SaveHistoryCommand(pergunta, "Resposta do OLlama")); // Manda salvar essa consulta e resposta no histórico
-                painelResposta.atualizarResposta("Processado via Command: Nenhuma conduta ilícita encontrada para a busca: " + pergunta); // Atualiza o painel
+                // Atualiza a tela informando que está processando
+                painelResposta.atualizarResposta("Processando com Inteligência Artificial (Ollama)... Aguarde.");
+
+                try {
+                    // Cria o agente iniciando pelo estado de receber a pergunta
+                    com.jurisai.agent.LegalAgent agent = new com.jurisai.agent.LegalAgent(
+                        new com.jurisai.pattern.state.ReceivingQuestionState()
+                    );
+                    
+                    // Define a pergunta digitada na interface
+                    agent.setQuestion(pergunta);
+
+                    // Executa o fluxo de estados (Recebendo -> Analisando -> Buscando -> Gerando com o Ollama -> Completo)
+                    agent.process(); // Receiving -> Analyzing
+                    agent.process(); // Analyzing -> SearchingKnowledge
+                    agent.process(); // SearchingKnowledge -> GeneratingAnswer (Aqui o Ollama é chamado de verdade!)
+                    agent.process(); // GeneratingAnswer -> Completed
+
+                    // Pega a resposta real gerada pelo Llama 3 e joga na tela!
+                    String respostaReal = agent.getAnswer();
+                    if (respostaReal != null && !respostaReal.isEmpty()) {
+                        painelResposta.atualizarResposta(respostaReal);
+                    } else {
+                        painelResposta.atualizarResposta("O Ollama processou, mas retornou uma resposta vazia.");
+                    }
+
+                } catch (Exception ex) {
+                    painelResposta.atualizarResposta("Erro ao comunicar com a IA: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
             }
         });
     }

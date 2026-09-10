@@ -1,5 +1,6 @@
 package com.jurisai.agent;
 
+import com.jurisai.pattern.state.*;
 import com.jurisai.command.LegalCommand;
 import com.jurisai.observer.AgentObserver;
 import com.jurisai.strategy.LegalStrategy;

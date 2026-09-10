@@ -1,4 +1,7 @@
-package agent;
+package com.jurisai.agent;
+
+import com.jurisai.pattern.state.*; 
+
 
 class ReceivingQuestionState implements AgentState {
     public void handle(LegalAgentContext context) {}
