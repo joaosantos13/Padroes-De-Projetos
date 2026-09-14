@@ -1,8 +1,8 @@
 package com.jurisai.agent;
 
 import com.jurisai.ai.LegalAiService;
-import com.jurisai.pattern.state.AgentState;
 import com.jurisai.config.SpringContext;
+import com.jurisai.pattern.state.AgentState;
 
 public class LegalAgent {
     
@@ -12,21 +12,18 @@ public class LegalAgent {
     private String answer;
     private LegalAiService legalAiService;
 
-    // Construtor atualizado com a Ponte do Spring
     public LegalAgent(AgentState state) {
         this.state = state;
         try {
             this.legalAiService = SpringContext.getBean(LegalAiService.class);
         } catch (Exception e) {
-            System.out.println("Aviso: Contexto do Spring ainda não inicializado ou LegalAiService não encontrado.");
+            System.out.println("Aviso: Contexto do Spring ainda não inicializado.");
         }
     }
 
     public void process() {
         state.handle(this);
     }
-
-    // --- GETTERS E SETTERS RESTAURADOS ---
 
     public void setQuestion(String question) {
         this.question = question;
