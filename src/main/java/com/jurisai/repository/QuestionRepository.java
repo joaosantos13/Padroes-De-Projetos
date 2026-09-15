@@ -10,7 +10,6 @@ import com.jurisai.entity.Question;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     
-    // Método personalizado para buscar perguntas por categoria
     List<Question> findByCategory(String category);
     List<Question> findAllByOrderByCreatedAtDesc();
 }

@@ -1,7 +1,7 @@
 package com.jurisai.agent;
 
 import com.jurisai.ai.LegalAiService;
-import com.jurisai.config.SpringContext;
+import com.jurisai.ai.SpringContext;
 import com.jurisai.pattern.state.AgentState;
 
 public class LegalAgent {

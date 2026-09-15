@@ -1,4 +1,4 @@
-package com.jurisai.strategy;
+package com.jurisai.pattern.strategy;
 
 import java.util.List;
 

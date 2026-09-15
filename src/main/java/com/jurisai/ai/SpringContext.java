@@ -1,4 +1,4 @@
-package com.jurisai.config;
+package com.jurisai.ai;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -12,10 +12,8 @@ public class SpringContext implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
-    }
-
-    // Método mágico que permite pegar qualquer serviço do Spring de qualquer lugar!
+        context = applicationContext;}
+        
     public static <T> T getBean(Class<T> beanClass) {
         return context.getBean(beanClass);
     }
